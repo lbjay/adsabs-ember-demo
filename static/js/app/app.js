@@ -10,4 +10,5 @@
  * 6. list of search results is sortable
 */
 
-window.Search = Ember.Application.create();
+window.App = Ember.Application.create();
+App.ApplicationAdapter = DS.FixtureAdapter.extend();
