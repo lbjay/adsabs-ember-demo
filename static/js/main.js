@@ -13,8 +13,15 @@ requirejs.config({
 });
 
 // Start the main app logic.
-requirejs(['jquery', 'handlebars', 'ember', 'bootstrap/bootstrap', 'app/app'],
-function   ($, handlebars, ember, bootstrap, foo) {
+requirejs(['jquery', 
+           'handlebars', 
+           'ember', 
+           'bootstrap/bootstrap', 
+           'app/app',
+           'app/router',
+           'app/models'],
+function($, handlebars, ember, bootstrap, app, router, models) {
+	debugger;
     //jQuery, canvas and the app/sub module are all
     //loaded and can be used here now.
 });
