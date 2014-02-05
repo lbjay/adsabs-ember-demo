@@ -10,29 +10,38 @@
  * 6. list of search results is sortable
 */
 
-window.Search = Ember.Application.create();
-Search.ApplicationAdapter = DS.FixtureAdapter.extend();
+App = Ember.Application.create();
+App.ApplicationAdapter = DS.FixtureAdapter.extend({});
 
-Search.Result = Ember.Object.extend({
-	bibcode: null,
-	title: null,
-	abs: null,
-	isSelected: false
+App.Router.map(function() {
+  this.resource('search', { path: '/'});
 });
 
-/* routers */
-
-Search.Router.map(function() {
-  this.route('search', { path: '/' });
+App.SearchRoute = Ember.Route.extend({
+	model: function() {
+		return App.Result.find('result');
+	},
 });
 
-Search.SearchController = Ember.ObjectController.extend({
-	userQuery: '',
+App.SearchController = Ember.ArrayController.extend({
+	queryInput: '',
 	rows: 20,
 	actions: {
 		executeSearch: function() {
-			console.log('foo! ' + this.userQuery);
+			var queryInput = this.get('queryInput');
+			console.log('foo! ' + this.queryInput);
 		}
+	}
+});
+
+App.Result = Ember.Object.extend({});
+App.Result.reopenClass({
+	find: function(query) {
+		return [
+		        { id: 1, title: "Woot! Black holes!", bibcode: "2010ApJ...xxx..xxxA", isSelected: false },                        
+		        { id: 2, title: "Yeah! Black holes!", bibcode: "2010ApJ...xxx..xxxB", isSelected: false },                        
+		        { id: 3, title: "Zoinks! Black holes!", bibcode: "2010ApJ...xxx..xxxC", isSelected: false }                        
+		        ];
 	}
 });
 

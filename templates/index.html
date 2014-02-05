@@ -21,10 +21,20 @@
 
     {% raw %}
     <script type="text/x-handlebars" data-template-name="search">
-        Query: {{ view.userQuery }}
-        <div class="query-controls">
-            {{ input type="text" id="q" placeholder="Search the ADS" 
-               value=userQuery action="executeSearch" }}
+        <h3>Search the ADS</h3>
+        <div>
+            {{input type="text" id="q" placeholder="Search the ADS" 
+               value=queryInput action="executeSearch"}}
+        </div>
+        <div>
+            <h3>Search Results</h3>
+            <h5>Query: <strong>{{queryInput}}</strong></h5>
+            {{#each}}
+                <div>
+                    <input type="checkbox" class="toggle">
+                    <label>{{title}}</label>
+                </div>
+            {{/each}}
         </div>
     </script>
 
@@ -37,14 +47,6 @@
             </div>
 
 
-            <div class="search-results" id="result-list">
-                {{#each controller}}
-                <div {{bind-attr class=":row :search-result isSelected:selected"}}>
-                    <input type="checkbox" class="toggle">
-                    <label>{{title}}</label>
-                </div>
-                {{/each}}
-            </div>
         </div>    
     </section>
     </script>
